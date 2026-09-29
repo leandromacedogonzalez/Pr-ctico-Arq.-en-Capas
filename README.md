@@ -1,26 +1,3 @@
-# Alta de Ticket – Arquitectura en tres capas (PHP)
-
-Aplicación web mínima para registrar un Ticket (título y descripción). Todo ticket nuevo se crea con estado `pendiente`.
-
-## Estructura
-
-| Capa | Archivos | Responsabilidad |
-|------|----------|-----------------|
-| Presentación | `public/tickets/crear.php` | Formulario, recepción de datos, mensaje de resultado |
-| Negocio | `negocio/Ticket.php` | Clase `Ticket`, validaciones y estado inicial |
-| Persistencia | `datos/Conexion.php`, `datos/TicketRepository.php` | Conexión PDO y `INSERT` |
-| Configuración | `config/config.php` | Parámetros de conexión (sin credenciales reales) |
-
-## Instalación
-
-1. Ejecutar `database/schema.sql` en MySQL/MariaDB.
-2. Si tu usuario/clave no son `root` / vacío, copiar `config/config.local.example.php` a `config/config.local.php` y completar (este archivo no se sube a Git).
-3. Iniciar el servidor desde la raíz del proyecto:
-   ```
-   php -S localhost:8000 -t public
-   ```
-4. Abrir http://localhost:8000/tickets/crear.php
-
 ## Respuestas
 
 *   **¿Qué código pertenece a la capa de presentación?**
