@@ -21,19 +21,19 @@ Aplicación web mínima para registrar un Ticket (título y descripción). Todo 
    ```
 4. Abrir http://localhost:8000/tickets/crear.php
 
-## Respuestas "Al finalizar"
+## Respuestas
 
 *   **¿Qué código pertenece a la capa de presentación?**
-    El archivo `public/tickets/crear.php`. Se encarga de mostrar la interfaz HTML al usuario y recibir los datos enviados por el formulario POST.
+    El archivo `public/tickets/crear.php`. Es el que tiene el HTML para mostrar el formulario y recibe los datos que manda el usuario.
 
 *   **¿Qué código pertenece a la capa de negocio?**
-    El archivo `negocio/Ticket.php`. Representa el dominio del problema y contiene las reglas, como establecer el estado inicial "pendiente" para todo ticket nuevo.
+    El archivo `negocio/Ticket.php`. Es donde armamos la clase Ticket con sus datos y donde le decimos que todos arrancan con estado "pendiente".
 
 *   **¿Qué código pertenece a la capa de persistencia?**
-    Los archivos `datos/TicketRepository.php` y `datos/Conexion.php`. Son los únicos que interactúan con la base de datos mediante SQL y PDO.
+    Los archivos `datos/TicketRepository.php` y `datos/Conexion.php`. Son los encargados de conectarse a la base de datos y hacer las consultas SQL.
 
 *   **¿Por qué el INSERT se encuentra en TicketRepository?**
-    Para cumplir con la separación de responsabilidades. Si alguna vez se cambia la base de datos, solo hay que modificar el repositorio, sin afectar a la capa de presentación ni a las reglas de negocio.
+    Para mantener las cosas separadas. De esta forma, si algún día queremos cambiar algo de la base de datos, solo tocamos este archivo y no desarmamos ni los formularios ni la clase Ticket.
 
 *   **¿Por qué el estado inicial pendiente es una regla de negocio y no una decisión del formulario?**
-    Porque es una regla estricta de cómo debe funcionar el sistema. Si estuviera en el formulario (por ejemplo en un input oculto), un usuario podría modificarlo y crear un ticket con estado "resuelto" engañando al sistema.
+    Porque es una regla de cómo tiene que funcionar la aplicación. Si lo pusiéramos en el formulario (HTML), cualquiera podría inspeccionar la página, cambiar el valor y mandar un ticket que ya esté "resuelto". Poniéndolo en la clase de negocio nos aseguramos de que siempre nazca como pendiente.
